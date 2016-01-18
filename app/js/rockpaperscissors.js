@@ -4,8 +4,9 @@
 'use strict';
 
 function getInput() {
-    search = prompt("Please choose either 'rock', 'paper', or 'scissors'. To exit type 'quit'.")
-    return search;
+
+   var answer = prompt("Please choose either 'rock', 'paper', or 'scissors'.");
+   return answer.toLowerCase();
 }
 function randomPlay() {
     var randomNumber = Math.random();
@@ -21,27 +22,20 @@ function randomPlay() {
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
-var search;
-var playerMove;
-var computerMove;
-var winner;
-var playerWins = 0;
-var computerWins = 0;
 
 
-// get user/player move  /  if null, input user/player move
+
+// get user/player move  /  if null, get user input
 function getPlayerMove(move) {
     
-    playerMove = move || getInput();
-    return playerMove;
+    return move || getInput();
 }
 
 
 // get computer move  /  if null, generate computer move
 function getComputerMove(move) {
     
-    computerMove = move || randomPlay();
-    return computerMove;
+    return move || randomPlay();
 }
 
 
@@ -53,12 +47,15 @@ function getWinner(playerMove,computerMove) {
         - return either 'Tie, Player or Computer'
     */
     
+    var winner;
+    
     if(playerMove === computerMove) {
         
         winner = 'Tie';    
         
     } else {
 
+        
         if (playerMove === 'rock') {
 
             if(computerMove === 'scissors') {
@@ -96,17 +93,20 @@ function playToFive() {
 /*
     - Play RPS game, first player to five
 */   
-    console.log('Lets play rock, paper, scissors!');
+    
+    var playerWins = 0;
+    var computerWins = 0;
     
     while (playerWins < 5 && computerWins < 5) {
         
-        getInput();
         
-        if (search == null || search.toLowerCase() == 'quit') {
+        var playerMove = getPlayerMove();
+        var computerMove = getComputerMove(); 
+        var winner = getWinner(playerMove, computerMove);
+        
+        if (playerMove === null || playerMove.toLowerCase() === 'quit') {
             break;
         } 
-
-        getWinner(getPlayerMove(search), getComputerMove(randomPlay()));
         
         console.log('Player chose ' + playerMove + ' to ' + computerMove + '!');
         
@@ -122,8 +122,10 @@ function playToFive() {
             }
             console.log(winner + ' wins!');
         }
-        console.log('The score is ' + playerWins + ' to ' + computerWins);
+        console.log('The score is player: ' + playerWins + ' to ' + computerWins);
     }
+    
+    return [playerWins, computerWins];
 }
 
 // call game
