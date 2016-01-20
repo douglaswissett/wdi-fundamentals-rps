@@ -24,6 +24,11 @@ function randomPlay() {
 
 
 
+function getMax() {
+
+    var max = parseInt(prompt("Play to how many rounds?"));
+    return max; 
+}
 
 // get user/player move  /  if null, get user input
 function getPlayerMove(move) {
@@ -54,33 +59,20 @@ function getWinner(playerMove,computerMove) {
         winner = 'Tie';    
         
     } else {
-
         
         if (playerMove === 'rock') {
 
-            if(computerMove === 'scissors') {
-                winner = 'Player';
-            } else {
-                winner = 'Computer';
-            }
+            winner = (computerMove === 'scissors') ? 'Player' : 'Computer';
         }
 
         if(playerMove === 'paper') {
 
-            if(computerMove === 'rock') {
-                winner = 'Player';
-            } else {
-                winner = 'Computer';
-            }   
+           winner = (computerMove === 'rock') ? 'Player' : 'Computer';  
         }
 
         if(playerMove === 'scissors') {
 
-            if(computerMove === 'paper') {
-                winner = 'Player';
-            } else {
-                winner = 'Computer';
-            }
+           winner = (computerMove === 'paper') ? 'Player' : 'Computer';
         }
     }
     
@@ -88,16 +80,19 @@ function getWinner(playerMove,computerMove) {
 }
 
 
-function playToFive() {
+function playToX() {
     
 /*
     - Play RPS game, first player to five
 */   
-    
+   
+    var max = getMax();
     var playerWins = 0;
     var computerWins = 0;
+
     
-    while (playerWins < 5 && computerWins < 5) {
+    
+    while (playerWins < max && computerWins < max) {
         
         
         var playerMove = getPlayerMove();
@@ -129,4 +124,5 @@ function playToFive() {
 }
 
 // call game
-playToFive();
+
+playToX();
